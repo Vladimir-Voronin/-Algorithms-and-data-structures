@@ -97,14 +97,11 @@ namespace Arrays
             }
 
             List<int> array = BaseInsertionSort(secarr);
-            int num = SortArray.Count > array.Count ? SortArray.Count : array.Count;
             int a = 0;
             int b = 0;
             List<int> result = new List<int>();
             while(a < SortArray.Count && b < array.Count)
             {
-                Console.WriteLine($"list1: {SortArray[a]}");
-                Console.WriteLine($"list2: {array[b]}");
                 if (SortArray[a] < array[b])
                 {
                     result.Add(SortArray[a]);
