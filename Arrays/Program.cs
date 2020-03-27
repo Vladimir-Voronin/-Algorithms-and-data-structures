@@ -67,7 +67,7 @@ namespace Arrays
         }
 
         //<summary>   
-        //Typical Bubble sort. Time function = O(N^2) (maximum, real: O(N) > t >= O(N^2))
+        //InsertionSort. Time function = O(N^2) (maximum, real: O(N) > t >= O(N^2))
         //</summary>
         private List<int> BaseInsertionSort(List<int> array)
         {
