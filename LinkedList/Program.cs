@@ -35,6 +35,7 @@ namespace LinkedList
             Console.WriteLine(array.Length);
             LinkedList<int> list2 = new LinkedList<int>(array2);
 
+            Console.WriteLine($"count: {list2.count}");
             Console.WriteLine(list2.Head.Value);
 
             List<int> Testlist2 = list2.GetOriginalList();
@@ -44,12 +45,15 @@ namespace LinkedList
             list2.Add(22);
             Console.WriteLine(list2.Tail.Value);
 
-
             list2.PrintOriginalList();
 
+            Console.WriteLine($"count: {list2.count}");
+ 
             list2.RemoveLast(2);
 
             list2.PrintOriginalList();
+
+            Console.WriteLine($"count: {list2.count}");
         }
     }
 
@@ -149,6 +153,7 @@ namespace LinkedList
                 if (Head.Next == null)
                 {
                     Head = null;
+                    count--;
                 }
                 else
                 {
@@ -159,6 +164,7 @@ namespace LinkedList
                     currentNode.Next = null;
                     Tail = currentNode;
                     currentNode = Head;
+                    count--;
                 }
             }
         }
