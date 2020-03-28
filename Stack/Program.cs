@@ -24,6 +24,7 @@ namespace Stack
             stack1.PrintStack();
             
             Console.WriteLine(stack1.Count);
+
         }
     }
 
@@ -74,14 +75,6 @@ namespace Stack
                     throw new Exception("You index is more then size of stack");
                 }
                 return Stack[index]; 
-            }
-            set
-            {
-                if (index > Size)
-                {
-                    throw new Exception("You index is more then size of stack");
-                }
-                Stack[index] = value;
             }
         }
 
