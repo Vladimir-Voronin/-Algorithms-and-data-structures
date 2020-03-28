@@ -1,0 +1,11 @@
+D:\c# algor\LinkedList\obj\Debug\netcoreapp3.1\LinkedList.csprojAssemblyReference.cache
+D:\c# algor\LinkedList\obj\Debug\netcoreapp3.1\LinkedList.AssemblyInfoInputs.cache
+D:\c# algor\LinkedList\obj\Debug\netcoreapp3.1\LinkedList.AssemblyInfo.cs
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.exe
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.deps.json
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.runtimeconfig.json
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.runtimeconfig.dev.json
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.dll
+D:\c# algor\LinkedList\bin\Debug\netcoreapp3.1\LinkedList.pdb
+D:\c# algor\LinkedList\obj\Debug\netcoreapp3.1\LinkedList.dll
+D:\c# algor\LinkedList\obj\Debug\netcoreapp3.1\LinkedList.pdb
