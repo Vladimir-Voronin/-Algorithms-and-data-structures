@@ -122,10 +122,8 @@ namespace LinkedList
             {
                 Head = new Node<T>(value);
             }
-
-            Node<T> currentNode = Tail;
-            currentNode.Next = new Node<T>(value);
-            Tail = currentNode.Next;
+            Tail.Next = new Node<T>(value);
+            Tail = Tail.Next;
             count++;
         }
 
