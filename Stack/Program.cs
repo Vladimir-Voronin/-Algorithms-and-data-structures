@@ -43,7 +43,7 @@ namespace Stack
             get { return size; }
             set { if (size <= 0)
                 {
-                    throw new Exception("Size cant be < 0");
+                    throw new Exception("Size cant be <= 0");
                 }
                 size = value;
             }

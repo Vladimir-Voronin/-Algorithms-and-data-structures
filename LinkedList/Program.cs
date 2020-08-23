@@ -174,6 +174,7 @@ namespace LinkedList
             }
         }
 
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<T>)this).GetEnumerator();
@@ -188,7 +189,9 @@ namespace LinkedList
                 current = current.Next;
             }
         }
+
     }
 }
 
 //Разобраться в интерфейсах IEnumerator, IEnumerable + реализовать конструктор нормально
+
