@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stack", "Stack\Stack.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Binary Tree", "Binary Tree\Binary Tree.csproj", "{E352A837-E54A-44DF-BCDB-C6FAF4FFD4DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "internal Dictionary", "internal Dictionary\internal Dictionary.csproj", "{49B4A785-C428-4F0A-B740-609CB1FEF4BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "internal Dictionary", "internal Dictionary\internal Dictionary.csproj", "{49B4A785-C428-4F0A-B740-609CB1FEF4BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "leetCode", "leetCode\leetCode.csproj", "{99F5B3FE-9419-4E93-BCEB-FC59CE67A2F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{49B4A785-C428-4F0A-B740-609CB1FEF4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B4A785-C428-4F0A-B740-609CB1FEF4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B4A785-C428-4F0A-B740-609CB1FEF4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F5B3FE-9419-4E93-BCEB-FC59CE67A2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F5B3FE-9419-4E93-BCEB-FC59CE67A2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F5B3FE-9419-4E93-BCEB-FC59CE67A2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F5B3FE-9419-4E93-BCEB-FC59CE67A2F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,9 @@ namespace leetCode
     {
         static void Main(string[] args)
         {
-            Rotate(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9}, 3);
+            Rotate(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3);
+            Console.WriteLine(ContainsDuplicate(new int[] { 1, 6, 2, 3, 5, 6 }));
+            Console.WriteLine(SingleNumber(new int[] { 4,1,2,1,2}));
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -41,13 +43,13 @@ namespace leetCode
                 while (prices[i] >= prices[i + 1])
                 {
                     i++;
-                    if (i + 1 >= prices.Length) 
+                    if (i + 1 >= prices.Length)
                     {
                         return result;
                         i--;
                         break;
                     }
-                    
+
                 }
                 if (prices[i] < prices[i + 1]) result -= prices[i];
 
@@ -77,113 +79,58 @@ namespace leetCode
             if (nums.Length > 1 && k != 0)
             {
                 int[] arr = new int[nums.Length];
-                nums.CopyTo(arr,0);
+                nums.CopyTo(arr, 0);
                 for (int i = 0; i < arr.Length; i++)
                 {
                     if (i + nums.Length - k < nums.Length) nums[i] = arr[i + nums.Length - k];
                     else nums[i] = arr[i - k];
                 }
             }
-            //while (k >= nums.Length) k -= nums.Length;
-            //if (nums.Length > 1 && k != 0)
-            //{
-            //    int[] arr = new int[nums.Length];
-            //    for (int i = 0; i < nums.Length; i++)
-            //    {
-            //        if(i + k < nums.Length) arr[i] = nums[i + k];
-            //        else arr[i] = nums[i + k - nums.Length];
-            //    }
-            //    nums = arr;
-            //}
-
-
-
-
-
-
-
-            //while (k >= nums.Length) k -= nums.Length;
-            //if (nums.Length > 1 && k != 0)
-            //{
-            //    int saveprev = nums[nums.Length - k];
-            //    int savenext = nums[0];
-            //    int iter = nums.Length - k;
-            //    int saveiter = nums.Length + 1;
-            //    int shift = 0;
-            //    for (int i = 0; i < nums.Length; i++)
-            //    {
-            //        if (iter == saveiter)
-            //        {
-            //            shift++;
-            //        }
-            //        if(iter + k >= nums.Length)
-            //        {
-            //            if (iter == saveiter) saveprev = nums[nums.Length - k + shift];
-            //            saveiter = iter;
-            //            saveprev = nums[iter + shift];
-            //            iter = iter - nums.Length + shift;
-            //        }
-            //        else
-            //        {
-            //        }
-            //        iter += k;
-            //        savenext = nums[iter];
-            //        nums[iter] = saveprev;
-            //        saveprev = savenext;
-            //    }
-            //}
-
-
-
-
-            //if(nums.Length > 1)
-            //{
-            //    while (k > nums.Length) k -= nums.Length;
-            //    int save1 = 0;
-            //    int save2 = nums[0];
-            //    int step = 0;
-            //    if (nums.Length % k == 0) // Есть ли общий делитель?
-            //    {
-            //        for (int i = 0; i < k; i++)
-            //        {
-            //            step = 0;
-            //            while (i + step < nums.Length)
-            //            {
-            //                if (step == 0)
-            //                {
-            //                    save1 = nums[i];
-            //                    nums[i] = nums[nums.Length - k + i];
-            //                    step += k;
-            //                }
-            //                else
-            //                {
-            //                    save2 = nums[i + step];
-            //                    nums[i + step] = save1;
-            //                    save1 = save2;
-            //                    step += k;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        int iter = nums.Length - k;
-            //        save1 = nums[iter];
-            //        for (int i = 0; i < nums.Length; i++)
-            //        {
-            //            if (iter + k >= nums.Length) iter = iter - nums.Length + k;
-            //            else iter += k;
-            //            save2 = nums[iter];
-            //            nums[iter] = save1;
-            //            save1 = save2;
-            //        }
-            //    } 
-            //}
-
             foreach (var item in nums)
             {
                 Console.WriteLine(item);
             }
+        }
+
+        //Given an array of integers, find if the array contains any duplicates.
+        //Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            //////Too lower
+            //for (int i = 0; i < nums.Length; i++)
+            //{
+            //    for (int k = i; k < nums.Length; k++)
+            //    {
+            //        if (nums[i] == nums[k + 1]) return true;
+            //    }
+            //}
+            //return false;
+            Array.Sort(nums);
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                if (nums[i] == nums[i + 1]) return true;
+            }
+            return false;
+        }
+
+        //Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+        //Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+        public static int SingleNumber(int[] nums)
+        {
+            if (nums.Length == 1) return nums[0];
+            Array.Sort(nums);
+            int save = nums[0];
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                if (nums[i] == nums[i + 1]) {
+                    save = nums[i + 1];
+                    continue;
+                } 
+                if (i == nums.Length - 2) return nums[i + 1];
+                if (i == 0 && nums[i] != nums[i + 1]) return nums[i];
+                if(save != nums[i+1] && nums[i+1] != nums[i+2]) return nums[i + 1];
+            }
+            return 0;
         }
     }
 }
