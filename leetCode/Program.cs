@@ -6,6 +6,7 @@ namespace leetCode
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(7 / 2);
             Rotate(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3);
             Console.WriteLine(ContainsDuplicate(new int[] { 1, 6, 2, 3, 5, 6 }));
             Console.WriteLine(SingleNumber(new int[] { 3,4,1,2,1,2}));
@@ -40,6 +41,18 @@ namespace leetCode
             new char[]{'.', '.', '.', '.', '.', '5', '2', '.', '.'}});
             
             Console.WriteLine(res);
+
+            Rotate(new int[][] { new int[] { 1, 2, 3 },
+                                 new int[] {4,5,6},
+                                 new int[] {7,8,9 } });
+
+            ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
+
+            Console.WriteLine(Reverse(536));
+
+            Console.WriteLine(FirstUniqChar("aadad"));
+
+            Console.WriteLine(IsAnagram("anagram", "nagaram"));
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -365,6 +378,159 @@ namespace leetCode
                 if ((copy[i] == copy[i + 1]) && copy[i] != '.') return true;
             }
             return false;
+        }
+
+        //You are given an n x n 2D matrix representing an image.
+        //Rotate the image by 90 degrees(clockwise).
+        //Note:
+        //You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.DO NOT allocate another 2D matrix and do the rotation.
+        public static void Rotate(int[][] matrix)
+        {
+            //int save;
+            //int save2;
+            //int[] saveindex = new int[] { 0, 0 };
+            //int i = 0;
+            //int k = 0;
+            //int numb = 0;
+            //int max = matrix.Length - 1;
+            //save2 = matrix[i][k];
+            //save = save2;
+            //for (int m = 0; m < matrix.Length / 2; m++)
+            //{
+            //    if(m != 0)
+            //    {
+            //        max--;
+            //        i = m;
+            //        k = m;
+            //    }
+            //    while (true)
+            //    {
+            //        if (k < max && i < max) k += max;
+            //        else if (k == max && i < max) i += max;
+            //        else if (k == max && i == max) k -= max;
+            //        else if (k < max && i == max) i -= max;
+            //        if (i > max) i -= max;
+            //        if (i < 0) i += max;
+            //        if(k > max) k -= max;
+            //        if(k < 0) k += max;
+            //        save2 = matrix[i][k];
+            //        matrix[i][k] = save;
+            //        if (i == saveindex[0] && k == saveindex[1])
+            //        {
+            //            i++;
+            //            k++;
+            //            saveindex[0] = i;
+            //            saveindex[1] = k;
+            //        }
+            //        else
+            //        {
+            //            save = save2;
+            //        }
+            //    }
+            
+            
+            Console.WriteLine(matrix.Length * (matrix.GetUpperBound(0) + 1));
+            for (int d = 0; d < matrix.Length; d++)
+            {
+                for (int m = 0; m < matrix.Length; m++)
+                {
+                    Console.Write("{0} ", String.Join(" ", matrix[d][m]));
+                }
+                Console.Write("\n");
+            }
+
+            //Write a function that reverses a string. The input string is given as an array of characters char[].
+            //Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+            //You may assume all the characters consist of printable ascii characters.
+            
+        }
+        public static void ReverseString(char[] s)
+        {
+            if (s.Length > 1)
+            {
+                char save1;
+                for (int i = 0; i < s.Length / 2; i++)
+                {
+                    save1 = s[i];
+                    s[i] = s[s.Length - i - 1];
+                    s[s.Length - i - 1] = save1;
+                }
+            }
+            
+            foreach (var item in s)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        //Given a 32-bit signed integer, reverse digits of an integer.
+        public static int Reverse(int x)
+        {
+            if (x.ToString().Length < 2) return x;
+            string s = x.ToString();
+            bool minus = false;
+            if (s[0] == '-')
+            {
+                minus = true;
+                s = s.Substring(1);
+            }
+            char save1;
+            char save2;
+            int m = (s.Length / 2 > 1) ? s.Length / 2 : s.Length - 1;
+            for (int i = 0; i < m; i++)
+            {
+                save1 = s[s.Length - i - 1];
+                save2 = s[i];
+                s = s.Remove(s.Length - i - 1, 1);
+                s = s.Insert(s.Length - i, save2.ToString());
+                s = s.Remove(i, 1);
+                s = s.Insert(i, save1.ToString());
+            }
+            if (minus) s = s.Insert(0, "-");
+            int res = 0;
+            Int32.TryParse(s, out res);
+            return res;
+        }
+
+        //Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
+        public static int FirstUniqChar(string s)
+        {
+            if (s.Length == 1) return 0;
+            int flag;
+            for (int i = 0; i < s.Length; i++)
+            {
+                flag = 0;
+                for (int k = 1; k < s.Length; k++)
+                {
+                    if (s[i] == s[k]) break;
+                    if (k == s.Length - 1) return i;
+                }
+            }
+            return -1;
+        }
+
+        //Given two strings s and t , write a function to determine if t is an anagram of s.
+        public static bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+
+            //set the counter for values 
+            int[] arr = new int[26];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                arr[s[i] - 'a']++;
+                arr[t[i] - 'a']--;
+            }
+
+            foreach (int count in arr)
+            {
+                if (count != 0)
+                    return false;
+            }
+
+            return true;
         }
     }
 }
