@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace leetCode
 {
@@ -6,53 +7,66 @@ namespace leetCode
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(7 / 2);
-            Rotate(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3);
-            Console.WriteLine(ContainsDuplicate(new int[] { 1, 6, 2, 3, 5, 6 }));
-            Console.WriteLine(SingleNumber(new int[] { 3,4,1,2,1,2}));
-            Console.WriteLine(Intersect(new int[] { 2,1,3,2}, new int[] { 1,4,2,2,5}));
-            PlusOne(new int[] { 9 });
-            MoveZeroes(new int[] { 1, 0, 0, 2, 5, 6 });
-            TwoSum(new int[] { -1, -2, -3, -4, -5 }, -8);
+            //Console.WriteLine(7 / 2);
+            //Rotate(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3);
+            //Console.WriteLine(ContainsDuplicate(new int[] { 1, 6, 2, 3, 5, 6 }));
+            //Console.WriteLine(SingleNumber(new int[] { 3, 4, 1, 2, 1, 2 }));
+            //Console.WriteLine(Intersect(new int[] { 2, 1, 3, 2 }, new int[] { 1, 4, 2, 2, 5 }));
+            //PlusOne(new int[] { 9 });
+            //MoveZeroes(new int[] { 1, 0, 0, 2, 5, 6 });
+            //TwoSum(new int[] { -1, -2, -3, -4, -5 }, -8);
 
-            Console.WriteLine();
-            char[][] ver = new char[][]{
-            new char[]{'5','3','.','.','7','.','.','.','.'},
-            new char[]{'6','.','.','1','9','5','.','.','.'},
-            new char[]{'.','9','8','.','.','.','.','6','.'},
-            new char[]{'8','.','.','.','6','.','.','.','3'},
-            new char[]{'4','.','.','8','.','3','.','.','1'},
-            new char[]{'7','.','.','.','2','.','.','.','6'},
-            new char[]{'.','6','.','.','.','.','2','8','.'},
-            new char[]{'.','.','.','4','1','9','.','.','5'},
-            new char[]{'.','.','.','.','8','.','.','7','9'}
-            };
-            Console.WriteLine(ver[1][0]);
-            Console.WriteLine();
-            bool res = IsValidSudoku(new char[][]{
-            new char[]{'.', '.', '.', '.', '.', '.', '5', '.', '.'},
-            new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            new char[]{'9', '3', '.', '.', '2', '.', '4', '.', '.'},
-            new char[]{'.', '.', '7', '.', '.', '.', '3', '.', '.'},
-            new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
-            new char[]{'.', '.', '.', '3', '4', '.', '.', '.', '.'},
-            new char[]{'.', '.', '.', '.', '.', '3', '.', '.', '.'},
-            new char[]{'.', '.', '.', '.', '.', '5', '2', '.', '.'}});
-            
-            Console.WriteLine(res);
+            //Console.WriteLine();
+            //char[][] ver = new char[][]{
+            //new char[]{'5','3','.','.','7','.','.','.','.'},
+            //new char[]{'6','.','.','1','9','5','.','.','.'},
+            //new char[]{'.','9','8','.','.','.','.','6','.'},
+            //new char[]{'8','.','.','.','6','.','.','.','3'},
+            //new char[]{'4','.','.','8','.','3','.','.','1'},
+            //new char[]{'7','.','.','.','2','.','.','.','6'},
+            //new char[]{'.','6','.','.','.','.','2','8','.'},
+            //new char[]{'.','.','.','4','1','9','.','.','5'},
+            //new char[]{'.','.','.','.','8','.','.','7','9'}
+            //};
+            //Console.WriteLine(ver[1][0]);
+            //Console.WriteLine();
+            //bool res = IsValidSudoku(new char[][]{
+            //new char[]{'.', '.', '.', '.', '.', '.', '5', '.', '.'},
+            //new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            //new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            //new char[]{'9', '3', '.', '.', '2', '.', '4', '.', '.'},
+            //new char[]{'.', '.', '7', '.', '.', '.', '3', '.', '.'},
+            //new char[]{'.', '.', '.', '.', '.', '.', '.', '.', '.'},
+            //new char[]{'.', '.', '.', '3', '4', '.', '.', '.', '.'},
+            //new char[]{'.', '.', '.', '.', '.', '3', '.', '.', '.'},
+            //new char[]{'.', '.', '.', '.', '.', '5', '2', '.', '.'}});
 
-            Rotate(new int[][] { new int[] { 1, 2, 3 },
-                                 new int[] {4,5,6},
-                                 new int[] {7,8,9 } });
+            //Console.WriteLine(res);
 
-            ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
+            //Rotate(new int[][] { new int[] { 1, 2, 3 },
+            //                     new int[] {4,5,6},
+            //                     new int[] {7,8,9 } });
 
-            Console.WriteLine(Reverse(536));
+            //ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
 
-            Console.WriteLine(FirstUniqChar("aadad"));
+            //Console.WriteLine(Reverse(536));
 
-            Console.WriteLine(IsAnagram("anagram", "nagaram"));
+            //Console.WriteLine(FirstUniqChar("aadad"));
+
+            //Console.WriteLine(IsAnagram("anagram", "nagaram"));
+
+            //Console.WriteLine(IsPalindrome("0p"));
+
+            //Console.WriteLine(MyAtoi("-91283472332"));
+
+            //Console.WriteLine(StrStr("yes my name", "my"));
+
+            //Console.WriteLine(CountAndSay(5));
+
+            Console.WriteLine(LongestCommonPrefix(new string[] { "sama", "saf", "sa"}));
+
+
+            Console.WriteLine(LongestCommonPrefix(new string[] { }));
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -531,6 +545,134 @@ namespace leetCode
             }
 
             return true;
+        }
+
+        //Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+        public static bool IsPalindrome(string s)
+        {
+            if (s.Length == 0) return true;
+            int k = s.Length - 1;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!Char.IsLetterOrDigit(s[i])) continue;
+                if (!Char.IsLetterOrDigit(s[k]))
+                {
+                    k--;
+                    i--;
+                    continue;
+                }
+                if (Char.ToLower(s[i]) != Char.ToLower(s[k])) return false;
+                k--;
+            }
+            return true;
+        }
+
+        //Implement atoi which converts a string to an integer.
+        //The function first discards as many whitespace characters as necessary until the first non-whitespace character is found.Then, starting from this character,
+        //takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+        //The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+        public static int MyAtoi(string str)
+        {
+            str = str.Trim();
+            int flag = 0;
+            string result = "";
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (flag == 0 && (str[i] == '-' || str[i] == '+'))
+                {
+                    result += str[i];
+                    flag++;
+                    continue;
+                }
+                if ((Char.IsDigit(str[i])) && (flag == 0 || flag == 1))
+                {
+                    result += str[i];
+                    flag = 1;
+                }
+                else break;
+            }
+            if (result == "" || result == "+" || result == "-") return 0;
+            int res = 0;
+            int check = 0;
+            Int32.TryParse(result, out res);
+            res = Int32.TryParse(result, out check) ? check : 1;
+            if (res == check) return res;
+            else if (result[0] == '-') return Int32.MinValue;
+            else return Int32.MaxValue;
+        }
+
+        //Implement strStr().
+        //Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+        public static int StrStr(string haystack, string needle)
+        {
+            if (needle == "") return 0;
+            if (needle.Length > haystack.Length) return -1;
+            for (int i = 0; i <= haystack.Length - needle.Length; i++)
+            {
+                if (haystack.Substring(i, needle.Length) == needle) return i;
+            }
+            return -1;
+        }
+
+        //The count-and-say sequence is the sequence of integers with the first five terms as following:
+        //1.     1
+        //2.     11
+        //3.     21
+        //4.     1211
+        //5.     111221
+        //1 is read off as "one 1" or 11.
+        //11 is read off as "two 1s" or 21.
+        //21 is read off as "one 2, then one 1" or 1211.
+        //1 ≤ n ≤ 30
+        public static string CountAndSay(int n)
+        {
+            if (n == 1) return "1";
+            string str = CountAndSay(n - 1);
+            int iter = 0;
+            char save = str[0];
+            var result = new StringBuilder();  //with StringBuilder result dont overwriting
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (save == str[i])
+                {
+                    iter++;
+                    continue;
+                }
+                else
+                {
+                    result.Append(iter.ToString());
+                    result.Append(save);
+                    save = str[i];
+                    iter = 1;
+                }
+            }
+            result.Append(iter.ToString());
+            result.Append(save);
+            return result.ToString();
+        }
+
+        //Write a function to find the longest common prefix string amongst an array of strings.
+        //If there is no common prefix, return an empty string "".
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            if (strs.Length <= 1) return strs[0];
+            int minlen = strs[0].Length;
+            for (int i = 1; i < strs.Length; i++)
+            {
+                if (strs[i].Length < minlen) minlen = strs[i].Length;
+            }
+            var result = new StringBuilder();
+            
+                
+            for (int i = 0; i < minlen; i++)
+            {
+                for (int k = 0; k < strs.Length - 1; k++)
+                {
+                    if (strs[k][i] != strs[k + 1][i]) return result.ToString();
+                }
+                result.Append(strs[0][i]);
+            }
+            return result.ToString();
         }
     }
 }
