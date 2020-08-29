@@ -63,10 +63,37 @@ namespace leetCode
 
             //Console.WriteLine(CountAndSay(5));
 
-            Console.WriteLine(LongestCommonPrefix(new string[] { "sama", "saf", "sa"}));
+            //Console.WriteLine(LongestCommonPrefix(new string[] { "sama", "saf", "sa"}));
 
+            ListNode a1 = new ListNode(5, null);
+            ListNode a2 = new ListNode(4, a1);
+            ListNode a3 = new ListNode(3, a2);
+            ListNode a4 = new ListNode(2, a3);
+            ListNode a5 = new ListNode(1, a4);
 
-            Console.WriteLine(LongestCommonPrefix(new string[] { }));
+            //Console.WriteLine(RemoveNthFromEnd(a2, 2));
+
+            //ListNode isnull = new ListNode(5, null);
+            //isnull = null;
+            //Console.WriteLine(ReverseList(a5));
+
+            ListNode b1 = new ListNode(4, null);
+            ListNode b2 = new ListNode(2, b1);
+            ListNode b3 = new ListNode(1, b2);
+
+            ListNode c1 = new ListNode(3, null);
+            ListNode c2 = new ListNode(2, c1);
+            ListNode c3 = new ListNode(1, c2);
+
+            //MergeTwoLists(b3, c3);
+
+            ListNode d1 = new ListNode(1, null);
+            ListNode d2 = new ListNode(2, d1);
+            ListNode d3 = new ListNode(2, d2);
+            ListNode d4 = new ListNode(2, d3);
+            ListNode d5 = new ListNode(1, d4);
+
+            IsPalindrome(d5);
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -655,7 +682,8 @@ namespace leetCode
         //If there is no common prefix, return an empty string "".
         public static string LongestCommonPrefix(string[] strs)
         {
-            if (strs.Length <= 1) return strs[0];
+            if (strs.Length == 0) return "";
+            if (strs.Length == 1) return strs[0];
             int minlen = strs[0].Length;
             for (int i = 1; i < strs.Length; i++)
             {
@@ -674,5 +702,139 @@ namespace leetCode
             }
             return result.ToString();
         }
+
+        //Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
+        //Given linked list -- head = [4,5,1,9], which looks like following:
+        /**
+        * Definition for singly-linked list.
+        * public class ListNode {
+        *     public int val;
+        *     public ListNode next;
+        *     public ListNode(int x) { val = x; }
+        * }
+        */
+        public static void DeleteNode(ListNode node)
+        {
+            node.val = node.next.val;
+            node.next = node.next.next;
+        }
+
+        //Given a linked list, remove the n-th node from the end of list and return its head.
+        public static ListNode RemoveNthFromEnd(ListNode head, int n)
+        {
+            //double pass algor
+
+            //ListNode iter = head;
+            //int len = 0;
+            //while(iter != null)
+            //{
+            //    iter = iter.next;
+            //    len++;
+            //}
+            //if (len == 1) return null;
+            //ListNode dummy = new ListNode(0, head);
+            //iter = dummy;
+            //int del = len - n;
+            //while(del > 0)
+            //{
+            //    del--;
+            //    iter = iter.next;
+            //}
+            //iter.next = iter.next.next;
+            //return dummy.next;
+
+            //one pass algor
+            ListNode save = new ListNode(0, head);
+            ListNode first = save;
+            ListNode second = save;
+            for (int i = 0; i < n; i++)
+            {
+                first = first.next;
+            }
+            while(first.next != null)
+            {
+                first = first.next;
+                second = second.next;
+            }
+            second.next = second.next.next;
+            return save.next;
+        }
+
+        //Reverse a singly linked list.
+        public static ListNode ReverseList(ListNode head)
+        {
+            //Recurcive
+
+            //if (head.next == null || head == null) return null;
+            //ListNode save = head;
+            //ListNode dummy = new ListNode(0, head);
+            //while(head.next.next != null)
+            //{
+            //    head = head.next;
+            //}
+            //save = head.next;
+            //head.next = head.next.next;
+            //return new ListNode(save.val, ReverseList(dummy.next));
+
+            //
+            ListNode save = null;
+            while (head != null)
+            {
+                save = new ListNode(head.val, save);
+                head = head.next;
+            }
+            return save;
+        }
+
+        //Merge two sorted linked lists and return it as a new sorted list. 
+        //The new list should be made by splicing together the nodes of the first two lists.
+        public static ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        {
+            ListNode result = new ListNode(0, null);
+            ListNode dummy = result;
+            while(l1 != null && l2 != null)
+            {
+                if (l1.val >= l2.val)
+                {
+                    result.next = l2;
+                    result = result.next;
+                    l2 = l2.next;
+                }
+                else
+                {
+                    result.next = l1;
+                    result = result.next;
+                    l1 = l1.next;
+                }
+            }
+            if(l1 != null)
+            {
+                result.next = l1;
+            }
+            if (l2 != null)
+            {
+                result.next = l2;
+            }
+            return result;
+        }
+
+        //Given a singly linked list, determine if it is a palindrome.
+        public static bool IsPalindrome(ListNode head)
+        {
+            
+        }
     }
+
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
 }
