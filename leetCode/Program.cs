@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace leetCode
 {
@@ -93,7 +94,10 @@ namespace leetCode
             ListNode d4 = new ListNode(2, d3);
             ListNode d5 = new ListNode(1, d4);
 
-            IsPalindrome(d5);
+            d1.next = d3;
+            Console.WriteLine(IsPalindrome(d5));
+
+            Console.WriteLine(HasCycle(d5));
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -807,21 +811,66 @@ namespace leetCode
                     l1 = l1.next;
                 }
             }
-            if(l1 != null)
-            {
-                result.next = l1;
-            }
-            if (l2 != null)
-            {
-                result.next = l2;
-            }
+            if(l1 != null) result.next = l1;
+            if (l2 != null) result.next = l2;
             return result;
         }
 
         //Given a singly linked list, determine if it is a palindrome.
         public static bool IsPalindrome(ListNode head)
         {
-            
+            if (head == null || head.next == null) return true;
+            Stack<int> stack = new Stack<int>();
+            ListNode dummy = new ListNode(0, head);
+            int len = 0;
+            while (head != null)
+            {
+                len++;
+                head = head.next;
+            }
+            head = dummy.next;
+            ListNode prev = dummy.next;
+            int iter = 0;
+            while(iter < len / 2)
+            {
+                iter++;
+                head = head.next;
+            }
+            if (len % 2 != 0)
+            {
+                iter++;
+                head = head.next;
+            }
+            for (int i = 0; i < len / 2; i++)
+            {
+                stack.Push(prev.val);
+                prev = prev.next;
+            }
+            int save;
+            while (head != null)
+            {
+                save = stack.Pop();
+                if (save != head.val) return false;
+                head = head.next;
+            }
+            return true;
+        }
+
+        //Given a linked list, determine if it has a cycle in it.
+        //To represent a cycle in the given linked list, we use an integer pos which represents the position(0-indexed) in the linked list where tail connects to.
+        //If pos is -1, then there is no cycle in the linked list.
+        public static bool HasCycle(ListNode head)
+        {
+            if (head == null || head.next == null) return false;
+            ListNode slow = head;
+            ListNode fast = head.next;
+            while (fast != slow)
+            {
+                if (fast == null || fast.next == null) return false;
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return true;
         }
     }
 
