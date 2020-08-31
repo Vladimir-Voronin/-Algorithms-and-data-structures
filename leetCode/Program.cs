@@ -78,26 +78,52 @@ namespace leetCode
             //isnull = null;
             //Console.WriteLine(ReverseList(a5));
 
-            ListNode b1 = new ListNode(4, null);
-            ListNode b2 = new ListNode(2, b1);
-            ListNode b3 = new ListNode(1, b2);
+            //ListNode b1 = new ListNode(4, null);
+            //ListNode b2 = new ListNode(2, b1);
+            //ListNode b3 = new ListNode(1, b2);
 
-            ListNode c1 = new ListNode(3, null);
-            ListNode c2 = new ListNode(2, c1);
-            ListNode c3 = new ListNode(1, c2);
+            //ListNode c1 = new ListNode(3, null);
+            //ListNode c2 = new ListNode(2, c1);
+            //ListNode c3 = new ListNode(1, c2);
 
-            //MergeTwoLists(b3, c3);
+            ////MergeTwoLists(b3, c3);
 
-            ListNode d1 = new ListNode(1, null);
-            ListNode d2 = new ListNode(2, d1);
-            ListNode d3 = new ListNode(2, d2);
-            ListNode d4 = new ListNode(2, d3);
-            ListNode d5 = new ListNode(1, d4);
+            //ListNode d1 = new ListNode(1, null);
+            //ListNode d2 = new ListNode(2, d1);
+            //ListNode d3 = new ListNode(2, d2);
+            //ListNode d4 = new ListNode(2, d3);
+            //ListNode d5 = new ListNode(1, d4);
 
-            d1.next = d3;
-            Console.WriteLine(IsPalindrome(d5));
+            //d1.next = d3;
+            //Console.WriteLine(IsPalindrome(d5));
 
-            Console.WriteLine(HasCycle(d5));
+            //Console.WriteLine(HasCycle(d5));
+
+            TreeNode t1 = new TreeNode(3);
+            TreeNode t2 = new TreeNode(3,t1,null);
+            TreeNode t3 = new TreeNode(3);
+            TreeNode t4 = new TreeNode(3);
+            TreeNode t5 = new TreeNode(3,t3,t2);
+            TreeNode t6 = new TreeNode(3);
+            TreeNode t7 = new TreeNode(3);
+            TreeNode t8 = new TreeNode(8,t5,t4);
+            TreeNode t9 = new TreeNode(12,t7,t6);
+            TreeNode t10 = new TreeNode(3,t8,t9);
+
+            //Console.WriteLine(IsValidBST(t2));
+
+            TreeNode t11 = new TreeNode(3);
+            TreeNode t12 = new TreeNode(1);
+            TreeNode t13 = new TreeNode(2, t12, t11);
+
+            TreeNode ch = new TreeNode(3);
+            ch.left = new TreeNode(9);
+            ch.right = new TreeNode(20);
+            ch.right.left = new TreeNode(15);
+            ch.right.right = new TreeNode(7);
+            //Console.WriteLine(IsValidBST(t13));
+
+            LevelOrder(ch);
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -162,8 +188,6 @@ namespace leetCode
         //Given an array, rotate the array to the right by k steps, where k is non-negative.
         public static void Rotate(int[] nums, int k)
         {
-
-
             while (k >= nums.Length) k -= nums.Length;
             if (nums.Length > 1 && k != 0)
             {
@@ -185,7 +209,7 @@ namespace leetCode
         //Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
         public static bool ContainsDuplicate(int[] nums)
         {
-            //////Too lower
+            //////Too slow
             //for (int i = 0; i < nums.Length; i++)
             //{
             //    for (int k = i; k < nums.Length; k++)
@@ -431,49 +455,7 @@ namespace leetCode
         //You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.DO NOT allocate another 2D matrix and do the rotation.
         public static void Rotate(int[][] matrix)
         {
-            //int save;
-            //int save2;
-            //int[] saveindex = new int[] { 0, 0 };
-            //int i = 0;
-            //int k = 0;
-            //int numb = 0;
-            //int max = matrix.Length - 1;
-            //save2 = matrix[i][k];
-            //save = save2;
-            //for (int m = 0; m < matrix.Length / 2; m++)
-            //{
-            //    if(m != 0)
-            //    {
-            //        max--;
-            //        i = m;
-            //        k = m;
-            //    }
-            //    while (true)
-            //    {
-            //        if (k < max && i < max) k += max;
-            //        else if (k == max && i < max) i += max;
-            //        else if (k == max && i == max) k -= max;
-            //        else if (k < max && i == max) i -= max;
-            //        if (i > max) i -= max;
-            //        if (i < 0) i += max;
-            //        if(k > max) k -= max;
-            //        if(k < 0) k += max;
-            //        save2 = matrix[i][k];
-            //        matrix[i][k] = save;
-            //        if (i == saveindex[0] && k == saveindex[1])
-            //        {
-            //            i++;
-            //            k++;
-            //            saveindex[0] = i;
-            //            saveindex[1] = k;
-            //        }
-            //        else
-            //        {
-            //            save = save2;
-            //        }
-            //    }
-            
-            
+            //later
             Console.WriteLine(matrix.Length * (matrix.GetUpperBound(0) + 1));
             for (int d = 0; d < matrix.Length; d++)
             {
@@ -872,6 +854,93 @@ namespace leetCode
             }
             return true;
         }
+
+        //Given a binary tree, find its maximum depth.
+        //The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+        //Note: A leaf is a node with no children.
+        public static int MaxDepth(TreeNode root)
+        {
+            if (root == null)
+                return 0;
+
+            // Recursively find the depth of each subtree.
+            int leftDepth = MaxDepth(root.left);
+            int rightDepth = MaxDepth(root.right);
+
+            // Get the larger depth and add 1 to it to
+            // account for the root.
+            if (leftDepth > rightDepth)
+                return (leftDepth + 1);
+            else
+                return (rightDepth + 1);
+        }
+
+        //Given a binary tree, determine if it is a valid binary search tree(BST).
+        //Assume a BST is defined as follows:
+        //The left subtree of a node contains only nodes with keys less than the node's key.
+        //The right subtree of a node contains only nodes with keys greater than the node's key.
+        //Both the left and right subtrees must also be binary search trees.
+        public static bool IsValidBST(TreeNode root)
+        {
+            if (root == null)
+                return true;
+
+            if (root.left != null && root.left.val > root.val) return false;
+            if (root.right != null && root.right.val < root.val) return false;
+            if ((root.left == null && root.right != null) || (root.left != null && root.right == null)) return false;
+
+            bool leftroot = IsValidBST(root.left);
+            bool rightroot = IsValidBST(root.right);
+
+            return leftroot && rightroot ? true : false;
+        }
+
+        //Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+        public static bool IsSymmetric(TreeNode root)
+        {
+            return IsMirror(root, root);
+        }
+
+        public static bool IsMirror(TreeNode r1, TreeNode r2)
+        {
+            if (r1 == null && r2 == null) return true;
+            if (r1 == null || r2 == null) return false;
+            if (r1.val != r2.val) return false;
+            return IsMirror(r1.left, r2.right) && IsMirror(r1.right, r2.left);
+        }
+
+        //Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+        public static IList<IList<int>> LevelOrder(TreeNode root)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> current = new List<int>();
+            List<TreeNode> nodes = new List<TreeNode>();
+            nodes.Add(root);
+            current.Add(root.val);
+            result.Add(current);
+            int many;
+            while(nodes.Count != 0)
+            {
+                current = new List<int>();
+                many = nodes.Count;
+                for (int i = 0; i < many; i++)
+                {
+                    if (nodes[0].left != null)
+                    {
+                        current.Add(nodes[0].left.val);
+                        nodes.Add(nodes[0].left);
+                    }
+                    if (nodes[0].right != null)
+                    {
+                        current.Add(nodes[0].right.val);
+                        nodes.Add(nodes[0].right);
+                    }
+                    nodes.Remove(nodes[0]);
+                }
+                result.Add(current);
+            }
+            return (IList<IList<int>>)result;
+        }
     }
 
 
@@ -886,4 +955,17 @@ namespace leetCode
         }
     }
 
+
+    public class TreeNode
+    {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+        {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }

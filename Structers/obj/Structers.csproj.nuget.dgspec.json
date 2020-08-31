@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\c# algor\\leetCode\\LeetCode.csproj": {}
+    "D:\\c# algor\\Structers\\Structers.csproj": {}
   },
   "projects": {
-    "D:\\c# algor\\leetCode\\LeetCode.csproj": {
+    "D:\\c# algor\\Structers\\Structers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\c# algor\\leetCode\\LeetCode.csproj",
-        "projectName": "LeetCode",
-        "projectPath": "D:\\c# algor\\leetCode\\LeetCode.csproj",
+        "projectUniqueName": "D:\\c# algor\\Structers\\Structers.csproj",
+        "projectName": "Structers",
+        "projectPath": "D:\\c# algor\\Structers\\Structers.csproj",
         "packagesPath": "C:\\Users\\Neptune\\.nuget\\packages\\",
-        "outputPath": "D:\\c# algor\\leetCode\\obj\\",
+        "outputPath": "D:\\c# algor\\Structers\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Neptune\\AppData\\Roaming\\NuGet\\NuGet.Config",
