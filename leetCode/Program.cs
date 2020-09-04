@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 
-namespace leetCode
+namespace LeetCode
 {
     class Program
     {
@@ -100,15 +100,15 @@ namespace leetCode
             //Console.WriteLine(HasCycle(d5));
 
             TreeNode t1 = new TreeNode(3);
-            TreeNode t2 = new TreeNode(3,t1,null);
+            TreeNode t2 = new TreeNode(3, t1, null);
             TreeNode t3 = new TreeNode(3);
             TreeNode t4 = new TreeNode(3);
-            TreeNode t5 = new TreeNode(3,t3,t2);
+            TreeNode t5 = new TreeNode(3, t3, t2);
             TreeNode t6 = new TreeNode(3);
             TreeNode t7 = new TreeNode(3);
-            TreeNode t8 = new TreeNode(8,t5,t4);
-            TreeNode t9 = new TreeNode(12,t7,t6);
-            TreeNode t10 = new TreeNode(3,t8,t9);
+            TreeNode t8 = new TreeNode(8, t5, t4);
+            TreeNode t9 = new TreeNode(12, t7, t6);
+            TreeNode t10 = new TreeNode(3, t8, t9);
 
             //Console.WriteLine(IsValidBST(t2));
 
@@ -123,7 +123,16 @@ namespace leetCode
             ch.right.right = new TreeNode(7);
             //Console.WriteLine(IsValidBST(t13));
 
-            LevelOrder(ch);
+            //LevelOrder(ch);
+
+            //int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            //SortedArrayToBST(arr);
+
+            //Merge(new int[] { 0 }, 0, new int[] { 1 }, 1);
+
+            //FirstBadVersion(5);
+
+            MaxProfit2(new int[] { 7, 2, 6, 3, 10, 4 });
         }
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
@@ -261,14 +270,14 @@ namespace leetCode
             Array.Sort(nums1);
             Array.Sort(nums2);
             int i = 0; int j = 0;
-            while(i < nums1.Length && j < nums2.Length)
+            while (i < nums1.Length && j < nums2.Length)
             {
-                if(nums1[i] == nums2[j])
+                if (nums1[i] == nums2[j])
                 {
                     arr[itemarr++] = nums1[i++];
                     j++;
                 }
-                else if(nums1[i] < nums2[j])
+                else if (nums1[i] < nums2[j])
                 {
                     i++;
                 }
@@ -316,7 +325,7 @@ namespace leetCode
             //return arr;
             for (int i = digits.Length - 1; i >= 0; i--)
             {
-                if(digits[i] == 9 && i == 0)
+                if (digits[i] == 9 && i == 0)
                 {
                     digits[i] = 0;
                     int[] arr = new int[digits.Length + 1];
@@ -374,7 +383,7 @@ namespace leetCode
             {
                 for (int k = i; k < nums.Length - 1; k++)
                 {
-                    if(nums[i] + nums[k + 1] == target)
+                    if (nums[i] + nums[k + 1] == target)
                     {
                         result[0] = i;
                         result[1] = k + 1;
@@ -409,7 +418,7 @@ namespace leetCode
                                                           board[6][k],
                                                           board[7][k],
                                                           board[8][k]})) return false;
-                            }
+            }
             int m = 0;
             int n = 0;
             for (int iter = 1; iter <= 9; iter++)
@@ -440,7 +449,7 @@ namespace leetCode
         public static bool ContainsDuplicateInSudoku(char[] nums)
         {
             char[] copy = new char[9];
-            nums.CopyTo(copy,0);
+            nums.CopyTo(copy, 0);
             Array.Sort(copy);
             for (int i = 0; i < copy.Length - 1; i++)
             {
@@ -469,7 +478,7 @@ namespace leetCode
             //Write a function that reverses a string. The input string is given as an array of characters char[].
             //Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
             //You may assume all the characters consist of printable ascii characters.
-            
+
         }
         public static void ReverseString(char[] s)
         {
@@ -483,7 +492,7 @@ namespace leetCode
                     s[s.Length - i - 1] = save1;
                 }
             }
-            
+
             foreach (var item in s)
             {
                 Console.WriteLine(item);
@@ -676,8 +685,8 @@ namespace leetCode
                 if (strs[i].Length < minlen) minlen = strs[i].Length;
             }
             var result = new StringBuilder();
-            
-                
+
+
             for (int i = 0; i < minlen; i++)
             {
                 for (int k = 0; k < strs.Length - 1; k++)
@@ -737,7 +746,7 @@ namespace leetCode
             {
                 first = first.next;
             }
-            while(first.next != null)
+            while (first.next != null)
             {
                 first = first.next;
                 second = second.next;
@@ -778,7 +787,7 @@ namespace leetCode
         {
             ListNode result = new ListNode(0, null);
             ListNode dummy = result;
-            while(l1 != null && l2 != null)
+            while (l1 != null && l2 != null)
             {
                 if (l1.val >= l2.val)
                 {
@@ -793,7 +802,7 @@ namespace leetCode
                     l1 = l1.next;
                 }
             }
-            if(l1 != null) result.next = l1;
+            if (l1 != null) result.next = l1;
             if (l2 != null) result.next = l2;
             return result;
         }
@@ -813,7 +822,7 @@ namespace leetCode
             head = dummy.next;
             ListNode prev = dummy.next;
             int iter = 0;
-            while(iter < len / 2)
+            while (iter < len / 2)
             {
                 iter++;
                 head = head.next;
@@ -913,13 +922,14 @@ namespace leetCode
         public static IList<IList<int>> LevelOrder(TreeNode root)
         {
             List<IList<int>> result = new List<IList<int>>();
+            if (root == null) return result;
             List<int> current = new List<int>();
             List<TreeNode> nodes = new List<TreeNode>();
             nodes.Add(root);
             current.Add(root.val);
             result.Add(current);
             int many;
-            while(nodes.Count != 0)
+            while (nodes.Count != 0)
             {
                 current = new List<int>();
                 many = nodes.Count;
@@ -937,35 +947,233 @@ namespace leetCode
                     }
                     nodes.Remove(nodes[0]);
                 }
-                result.Add(current);
+                if (current.Count > 0) result.Add(current);
             }
-            return (IList<IList<int>>)result;
+            return result;
         }
-    }
 
-
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
+        //Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+        //For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+        public static TreeNode SortedArrayToBST(int[] nums)
         {
-            this.val = val;
-            this.next = next;
+            return BST(nums, 0, nums.Length - 1);
         }
-    }
 
-
-    public class TreeNode
-    {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+        public static TreeNode BST(int[] arr, int start, int end)
         {
-            this.val = val;
-            this.left = left;
-            this.right = right;
+            /* Base Case */
+            if (start > end)
+            {
+                return null;
+            }
+
+            /* Get the middle element and make it root */
+            int mid = (start + end) / 2;
+            TreeNode node = new TreeNode(arr[mid]);
+
+            /* Recursively construct the left subtree and make it  
+             left child of root */
+            node.left = BST(arr, start, mid - 1);
+
+            /* Recursively construct the right subtree and make it  
+             right child of root */
+            node.right = BST(arr, mid + 1, end);
+
+            return node;
         }
-    }
+
+        //Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+        //Note:
+        //The number of elements initialized in nums1 and nums2 are m and n respectively.
+        //You may assume that nums1 has enough space (size that is equal to m + n) to hold additional elements from nums2.
+        public static void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            while (m > 0 && n > 0)
+            {
+                if (nums1[m - 1] > nums2[n - 1])
+                {
+                    nums1[m + n - 1] = nums1[m - 1];
+                    m--;
+                }
+                else
+                {
+                    nums1[m + n - 1] = nums2[n - 1];
+                    n--;
+                }
+            }
+
+            while (n > 0)
+            {
+                nums1[m + n - 1] = nums2[n - 1];
+                n--;
+            }
+        }
+
+        //You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check.
+        //Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+        //Suppose you have n versions[1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+        //You are given an API bool isBadVersion(version) which will return whether version is bad.Implement a function to find the first bad version.
+        //You should minimize the number of calls to the API.
+        public static int FirstBadVersion(int n)
+        {
+            //int save = n / 2;
+            //int fix = n / 2;
+            //int save2 = -1;
+            //int save3 = n / 2;
+            //int result = 0;
+            //while (save2 != save)
+            //{
+            //    save2 = save;
+            //    if (IsBadVersion(save) == true)
+            //    {
+            //        result = save;
+            //        save -= fix;
+            //    }
+            //    else save += fix;
+            //    fix = fix/2;
+            //}
+            //return result;
+
+            int middle = n / 2;
+            int end = n;
+            int result = 0;
+            int save = n;
+            while(middle != save)
+            {
+                save = middle;
+                if(IsBadVersion(middle))
+                {
+                    result = middle;
+                    end = middle - 1;
+                    middle = end / 2 + 1;
+                }
+                else
+                {
+                    middle = (middle + end) / 2;
+                }
+            }
+            return result;
+         }
+
+        public static bool IsBadVersion(int n)
+        {
+            return n >= 4 ? true : false;
+        }
+
+        //You are climbing a stair case. It takes n steps to reach to the top.
+        //Each time you can either climb 1 or 2 steps.In how many distinct ways can you climb to the top?
+        public static int ClimbStairs(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            int result = 2;
+            int prevresult = 1;
+            int save = 0;
+            for (int i = 2; i < n + 1; i++)
+            {
+                save = prevresult;
+                result = result + prevresult;
+                prevresult = result - save;
+            }
+            return result;
+        }
+
+        //Say you have an array for which the ith element is the price of a given stock on day i.
+
+        //If you were only permitted to complete at most one transaction(i.e., buy one and sell one share of the stock),
+        //design an algorithm to find the maximum profit.
+        public static int MaxProfit2(int[] prices)
+        {
+            //Base on MaxProfit1
+
+            //int min = Int32.MaxValue;
+            //int max = 0;
+            //int result1 = 0;
+            //int result2 = 0;
+            //for (int i = 0; i < prices.Length; i++)
+            //{
+            //    if (i + 1 >= prices.Length)
+            //    {
+            //        break;
+            //    }
+
+            //    while (prices[i] >= prices[i + 1])
+            //    {
+            //        i++;
+            //        if (i + 1 >= prices.Length)
+            //        {
+            //            return result1;
+            //            i--;
+            //            break;
+            //        }
+            //    }
+            //    if (prices[i] < prices[i + 1]) min = prices[i] < min ? prices[i] : min;
+
+            //    while (prices[i] <= prices[i + 1])
+            //    {
+            //        i++;
+            //        if (i + 1 >= prices.Length)
+            //        {
+            //            max = prices[i];
+            //            i--;
+            //            break;
+            //        }
+
+            //    }
+            //    if (prices[i] > prices[i + 1]) max = prices[i];
+            //    if (result1 == 0) result1 = max - min;
+            //    else
+            //    {
+            //        result2 = max - min;
+            //        result1 = result2 > result1 ? result2 : result1;
+            //    }
+
+            //}
+            //return result1;
+
+
+            //Better solution)
+            int min = Int32.MaxValue;
+            int result = 0;
+            for (int i = 0; i < prices.Length; i++)
+            {
+                if (prices[i] < min)
+                {
+                    min = prices[i];
+                    continue;
+                }
+                else
+                {
+                    result = prices[i] - min > result ? prices[i] - min : result;
+                }
+            }
+        }
+    }   
+    
+
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+
+
+        public class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+            {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+    
 }
