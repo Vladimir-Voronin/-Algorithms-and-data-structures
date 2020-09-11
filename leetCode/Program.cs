@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode
 {
@@ -132,8 +133,23 @@ namespace LeetCode
 
             //FirstBadVersion(5);
 
-            MaxProfit2(new int[] { 7, 2, 6, 3, 10, 4 });
+            //MaxProfit2(new int[] { 7, 2, 6, 3, 10, 4 });
+
+            //MaxSummary(new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+
+            //Rob(new int[] { 2, 7, 9, 3, 1 });
+
+            ////Console.WriteLine(CountPrimes(10));
+            //Console.WriteLine(ThreeSum(new int[] { -1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4 }));
+            ListNode v5 = new ListNode(5, null);
+            ListNode v4 = new ListNode(4, v5);
+            ListNode v3 = new ListNode(3, v4);
+            ListNode v2 = new ListNode(2, v3);
+            ListNode v1 = new ListNode(1, v2);
+            OddEvenList(v1);
+            //Console.WriteLine(NextLargerNodes(v3));
         }
+        
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
         //Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -1147,11 +1163,325 @@ namespace LeetCode
                     result = prices[i] - min > result ? prices[i] - min : result;
                 }
             }
+            return result;
         }
-    }   
-    
 
-        public class ListNode
+        public static int MaxSummary(int[] a)
+        {
+            int size = a.Length;
+            int max_so_far = int.MinValue,
+                max_ending_here = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                max_ending_here = max_ending_here + a[i];
+
+                if (max_so_far < max_ending_here)
+                    max_so_far = max_ending_here;
+
+                if (max_ending_here < 0)
+                    max_ending_here = 0;
+            }
+
+            return max_so_far;
+        }
+
+        //You are a professional robber planning to rob houses along a street. 
+        //Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent
+        //houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+        //Solution with Tree (bad)
+        //public static int Rob(int[] nums)
+        //{
+        //    if (nums.Length == 0) return 0;
+        //    TreeNode node;
+        //    int result1;
+        //    int result2 = 0;
+        //    (node,result1) = TreeRob(nums, 0, 0);
+        //    if(nums.Length > 1)
+        //        (node, result2) = TreeRob(nums, 1, 0);
+        //    return Math.Max(result1,result2);
+        //}
+
+        //public static (TreeNode, int) TreeRob(int[] nums, int start, int sum)
+        //{
+        //    TreeNode node = new TreeNode(nums[start] + sum);
+        //    sum = nums[start] + sum;
+        //    int result1 = 0;
+        //    int result2 = 0;
+        //    int result = node.val;
+
+        //    if (start + 2 < nums.Length)
+        //        (node.left,result1) = TreeRob(nums, start + 2, sum);
+
+        //    if (start + 3 < nums.Length)
+        //        (node.right, result2) = TreeRob(nums, start + 3, sum);
+
+        //    result = Math.Max(result, Math.Max(result1, result2));
+        //    return (node, result);
+        //}
+
+        //Best solution
+        public static int Rob(int[] nums)
+        {
+            int n = nums.Length;
+            if (n == 0)
+                return 0;
+
+            int value1 = nums[0];
+            if (n == 1)
+                return value1;
+
+            int value2 = Math.Max(nums[0], nums[1]);
+            if (n == 2)
+                return value2;
+
+            // contains maximum stolen value at the end 
+            int max_val = 0;
+
+            // Fill remaining positions 
+            for (int i = 2; i < n; i++)
+            {
+                max_val = Math.Max(nums[i] + value1, value2);
+                value1 = value2;
+                value2 = max_val;
+            }
+
+            return max_val;
+        }
+
+        //Write a program that outputs the string representation of numbers from 1 to n.
+        //But for multiples of three it should output “Fizz” instead of the number 
+        //and for the multiples of five output “Buzz”. For numbers which are multiples of both three and five output “FizzBuzz”.
+        public static IList<string> FizzBuzz(int n)
+        {
+            List<string> result = new List<string>();
+            string push = "";
+            for (int i = 1; i <= n; i++)
+            {
+                push = "";
+                if (i % 3 == 0) push += "Fizz";
+                if(i % 5 == 0) push += "Buzz";
+                if (push == "") push = i.ToString();
+                result.Add(push);
+            }
+            return result;
+        }
+
+        //Count the number of prime numbers less than a non-negative number, n.
+        public static int CountPrimes(int n)
+        {
+            bool[] isPrime = new bool[n];
+            for (int i = 2; i < n; i++)
+            {
+                isPrime[i] = true;
+            }
+            // Loop's ending condition is i * i < n instead of i < sqrt(n)
+            // to avoid repeatedly calling an expensive function sqrt().
+            for (int i = 2; i * i < n; i++)
+            {
+                if (!isPrime[i]) continue;
+                for (int j = i * i; j < n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+            int count = 0;
+            for (int i = 2; i < n; i++)
+            {
+                if (isPrime[i]) count++;
+            }
+            return count;
+        }
+
+        //The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+        //Given two integers x and y, calculate the Hamming distance.
+        public static int HammingDistance(int x, int y)
+        {
+            int xoy = x ^ y;
+            string xb = Convert.ToString(x, 2);
+            string yb = Convert.ToString(y, 2);
+            int result = 0;
+            StringBuilder max = new StringBuilder(xb.Length >= yb.Length ? xb : yb);
+            StringBuilder min = new StringBuilder(xb.Length < yb.Length ? xb : yb);
+            while(min.Length != max.Length)
+            {
+                min.Insert(0, '0');
+            }
+
+            for (int i = 0; i < max.Length; i++)
+            {
+                if (max[i] != min[i]) result++;
+            }
+            return result;
+        }
+
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            //O(n^3)
+            List<int> origin = nums.ToList<int>();
+            origin.Sort();
+            List<List<int>> result = new List<List<int>>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int n = i + 1; n < nums.Length; n++)
+                {
+                    for (int s = n + 1; s < nums.Length; s++)
+                    {
+                        if (origin[i] == -(origin[n] + origin[s]))
+                        {
+                            result.Add(new List<int> { origin[i], origin[n], origin[s] });
+                            result[result.Count - 1].Sort();
+                            
+                        }
+                    }
+                }
+            }
+            for (int i = 2; i <= result.Count; i++)
+            {
+                for (int n = 2; n <= result.Count; n++)
+                {
+                    if (result.Count > 1 && i - 1 != n &&
+                    result[n - 1][0] == result[i - 2][0] &&
+                    result[n - 1][1] == result[i - 2][1] &&
+                    result[n - 1][2] == result[i - 2][2])
+                    {
+                        result.RemoveAt(n - 1);
+                        n--;
+                    }
+                }
+            }
+            result.Union<IList<int>>(result);
+            return result.ToList<IList<int>>();
+        }
+
+        //Given head which is a reference node to a singly-linked list. 
+        //The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
+        public static int GetDecimalValue(ListNode head)
+        {
+            ListNode dummy = new ListNode(0, head);
+            int count = -1;
+            double result = 0;
+            while (head != null)
+            {
+                count += 1;
+                head = head.next;
+            }
+            dummy = dummy.next;
+            while(dummy != null)
+            {
+                if(dummy.val == 1)
+                {
+                    result += Math.Pow(2, count);
+                }
+                count--;
+                dummy = dummy.next;
+            }
+            return Convert.ToInt32(result);
+        }
+
+        //Given a non-empty, singly linked list with head node head, return a middle node of linked list.
+        public static ListNode MiddleNode(ListNode head)
+        {
+            ListNode dummy = new ListNode(0, head);
+            int size = 0;
+            while(head != null)
+            {
+                size++;
+                head = head.next;
+            }
+            size = size / 2 + 1;
+            dummy = dummy.next;
+            for (int i = 0; i < size; i++)
+            {
+                dummy = dummy.next;
+            }
+            return dummy;
+        }
+
+        //We are given a linked list with head as the first node.  Let's number the nodes in the list: node_1, node_2, node_3, ... etc.
+        //Each node may have a next larger value: for node_i, next_larger(node_i) is the node_j.val such that j > i, node_j.val > node_i.val, 
+        //and j is the smallest possible choice.  If such a j does not exist, the next larger value is 0.
+        public static int[] NextLargerNodes(ListNode head)
+        {
+            ListNode dummy = new ListNode(0, head);
+            int size = 0;
+            while(head != null)
+            {
+                ListNode current = new ListNode(0, head);
+                while (true)
+                {
+                    if (head.next != null && head.next.val > current.next.val) 
+                    {
+                        current.next.val = head.next.val;
+                        break;
+                    }
+                    else if (head.next != null) head = head.next;
+                    else
+                    {
+                        current.next.val = 0;
+                        break;
+                    };
+                }
+                head = current.next.next;
+                size++;
+            }
+            int[] result = new int[size];
+            dummy = dummy.next;
+            int i = 0;
+            while (dummy != null)
+            {
+                result[i] = dummy.val;
+                dummy = dummy.next;
+                i++;
+            }
+            return result;
+        }
+
+        //We are given head, the head node of a linked list containing unique integer values.
+        //We are also given the list G, a subset of the values in the linked list.
+        //Return the number of connected components in G, where two values are connected if they appear consecutively in the linked list.
+        public static int NumComponents(ListNode head, int[] G)
+        {
+            HashSet<int> set = new HashSet<int>();
+            foreach (var item in G)
+            {
+                set.Add(item);
+            }
+            int result = 0;
+            while(head != null)
+            {
+                if (set.Contains(head.val) &&
+                    (head.next == null || !set.Contains(head.next.val))) result++;
+               head = head.next;
+            }
+            return result;
+        }
+
+        //Given a singly linked list, group all odd nodes together followed by the even nodes.
+        //Please note here we are talking about the node number and not the value in the nodes.
+        public static ListNode OddEvenList(ListNode head)
+        {
+            ListNode result = new ListNode(head.val, null);
+            ListNode dummy = new ListNode(0, result);
+            ListNode dinamic = head;
+            while (dinamic != null && dinamic.next != null && dinamic.next.next != null)
+            {
+                result.next = new ListNode(dinamic.next.next.val, null);
+                result = result.next;
+                dinamic = dinamic.next.next;
+            }
+            dinamic = new ListNode(0, head);
+            while (dinamic != null && dinamic.next != null && dinamic.next.next != null)
+            {
+                result.next = new ListNode(dinamic.next.next.val, null);
+                result = result.next;
+                dinamic = dinamic.next.next;
+            }
+            return dummy.next;
+        }
+    }
+
+    public class ListNode
         {
             public int val;
             public ListNode next;
