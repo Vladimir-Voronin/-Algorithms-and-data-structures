@@ -141,15 +141,43 @@ namespace LeetCode
 
             ////Console.WriteLine(CountPrimes(10));
             //Console.WriteLine(ThreeSum(new int[] { -1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4 }));
-            ListNode v5 = new ListNode(5, null);
-            ListNode v4 = new ListNode(4, v5);
-            ListNode v3 = new ListNode(3, v4);
-            ListNode v2 = new ListNode(2, v3);
-            ListNode v1 = new ListNode(1, v2);
-            OddEvenList(v1);
-            //Console.WriteLine(NextLargerNodes(v3));
+
+            //ListNode x2 = new ListNode(9, null);
+            //ListNode ch2 = new ListNode(8, x2);
+
+            //ListNode x1 = new ListNode(7, null);
+            //ListNode ch1 = new ListNode(6, x1);
+
+
+            //ListNode v5 = new ListNode(5, null);
+            //ListNode v4 = new ListNode(4, v5);
+            //ListNode v3 = new ListNode(3, v4);
+            //ListNode v2 = new ListNode(2, v3);
+            //ListNode v1 = new ListNode(1, v2);
+            //Flatten(v1);
+            ////Console.WriteLine(NextLargerNodes(v3));
+            ////GetRandom(v5);
+            //SortArrayByParity(new int[] { 1, 3, 2, 4, 5 });
+
+            //ThreeSum(new int[] { 1,2,-2,-1 });
+            //List<int> check1 = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7 });
+            //HashSet<int> hash1 = new HashSet<int>(check1.GetRange(0, 0));
+            //HashSet<int> hash2 = new HashSet<int>(check1.GetRange(3, check1.Count - 3));
+            //hash1.UnionWith(hash2);
+            //foreach (var item in hash2)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            //SetZeroes(new int[][] { new int[] {0, 1, 2, 0 },
+            //                        new int[] {3, 4, 5, 2},
+            //                        new int[] {1, 3, 1, 5} });
+            string[] st = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
+
+            GroupAnagrams(st);
+
+            LengthOfLongestSubstring("cdd");
         }
-        
+
 
         //Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
         //Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -1315,45 +1343,6 @@ namespace LeetCode
             return result;
         }
 
-        public static IList<IList<int>> ThreeSum(int[] nums)
-        {
-            //O(n^3)
-            List<int> origin = nums.ToList<int>();
-            origin.Sort();
-            List<List<int>> result = new List<List<int>>();
-            for (int i = 0; i < nums.Length; i++)
-            {
-                for (int n = i + 1; n < nums.Length; n++)
-                {
-                    for (int s = n + 1; s < nums.Length; s++)
-                    {
-                        if (origin[i] == -(origin[n] + origin[s]))
-                        {
-                            result.Add(new List<int> { origin[i], origin[n], origin[s] });
-                            result[result.Count - 1].Sort();
-                            
-                        }
-                    }
-                }
-            }
-            for (int i = 2; i <= result.Count; i++)
-            {
-                for (int n = 2; n <= result.Count; n++)
-                {
-                    if (result.Count > 1 && i - 1 != n &&
-                    result[n - 1][0] == result[i - 2][0] &&
-                    result[n - 1][1] == result[i - 2][1] &&
-                    result[n - 1][2] == result[i - 2][2])
-                    {
-                        result.RemoveAt(n - 1);
-                        n--;
-                    }
-                }
-            }
-            result.Union<IList<int>>(result);
-            return result.ToList<IList<int>>();
-        }
-
         //Given head which is a reference node to a singly-linked list. 
         //The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
         public static int GetDecimalValue(ListNode head)
@@ -1479,31 +1468,334 @@ namespace LeetCode
             }
             return dummy.next;
         }
+
+        //Flatten the list so that all the nodes appear in a single-level, doubly linked list.You are given the head of the first level of the list.
+        public static ListNode Flatten(ListNode head)
+        {
+            ListNode result = new ListNode(0, null);
+            ListNode dummy = new ListNode(0, result);
+            List<ListNode> save = new List<ListNode>();
+            while(true)
+            {
+                if(head != null && head.child == null)
+                {
+                    result.next = head;
+                    head = head.next;
+                }
+                else if(head != null)
+                {
+                    result.next = head;
+                    result = result.next;
+                    if(head.next != null) save.Add(head.next);
+                    result.next = head.child;
+                    head = head.child.next;
+                }
+                else if(head == null)
+                {
+                    if (save.Count == 0) break;
+                    else
+                    {
+                        result.next = save[save.Count - 1];
+                        head = save[save.Count - 1].next;
+                        save.RemoveAt(save.Count - 1);
+                    }
+                }
+                result = result.next;
+            }
+            return dummy.next.next;
+        }
+
+        //Given a (singly) linked list with head node root, write a function to split the linked list into k consecutive linked list "parts".
+        public static ListNode[] SplitListToParts(ListNode head, int k)
+        {
+            ListNode[] result = new ListNode[k];
+            ListNode dummy = new ListNode(0, head);
+
+            int size = 0;
+            while(head != null)
+            {
+                size++;
+                head = head.next;
+            }
+
+            int check = size % k;
+            int len = size / k;
+
+            dummy = dummy.next;
+            ListNode head2 = new ListNode(0, dummy);
+            head2 = head2.next;
+
+            for (int i = 0; i < k; i++)
+            {
+                ListNode din = new ListNode(0, head2);
+                dummy = new ListNode(0, din);
+                for (int n = 0; n < (check > 0 ? len + 1 : len); n++)
+                {
+                    din = din.next;
+                    head2 = head2.next;
+                }
+                check--;
+                din.next = null;
+                result[i] = dummy.next.next;
+            }
+            return result;
+        }
+
+        //Given a singly linked list, return a random node's value from the linked list. Each node must have the same probability of being chosen.
+        public static int GetRandom(ListNode head)
+        {
+            ListNode dummy = new ListNode(0, head);
+            Random rand = new Random();
+            int size = 0;
+            while(head != null)
+            {
+                size++;
+                head = head.next;
+            }
+
+            int choicenumber = rand.Next(size);
+            int step = 0;
+            dummy = dummy.next;
+            while(step != choicenumber)
+            {
+                dummy = dummy.next;
+                step++;
+            }
+            return dummy.val;
+        }
+
+        public static int[] SortArrayByParity(int[] A)
+        {
+            int save;
+            int step = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if(A[i] % 2 == 0 && i == step)
+                {
+                    step++;
+                }
+                else if(A[i] % 2 == 0)
+                {
+                    save = A[step];
+                    A[step] = A[i];
+                    A[i] = save;
+                    step++;
+                }
+            }
+            return A;
+        }
+        public static void PrintArray<T>(IList<T> arr)
+        {
+            foreach (var item in arr)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            List<List<int>> result = new List<List<int>>();
+            if (nums.Length < 3) return result.ToList<IList<int>>();
+            List<int> origin = nums.ToList<int>();
+            origin.Sort();
+
+            //O(n^2)
+            HashSet<int> mainhashset = new HashSet<int>(origin.GetRange(2, origin.Count - 2));
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int n = i + 1; n < nums.Length; n++)
+                {
+                    int search = -(origin[i] + origin[n]);
+                    if (mainhashset.Contains(search))
+                    {
+                        if(n + 1 < nums.Length && search >= origin[n + 1])
+                        {
+                            result.Add(new List<int> { origin[i], origin[n], search });
+                            result[result.Count - 1].Sort();
+                        }
+                    }
+                }
+            }
+
+            for (int i = 2; i <= result.Count; i++)
+            {
+                for (int n = 2; n <= result.Count; n++)
+                {
+                    if (result.Count > 1 && i - 1 != n &&
+                    result[n - 1][0] == result[i - 2][0] &&
+                    result[n - 1][1] == result[i - 2][1] &&
+                    result[n - 1][2] == result[i - 2][2])
+                    {
+                        result.RemoveAt(n - 1);
+                        n--;
+                    }
+                }
+            }
+            return result.ToList<IList<int>>();
+        }
+
+        public static void SetZeroes(int[][] matrix)
+        {
+            List<int> ilist = new List<int>();
+            List<int> klist = new List<int>();
+            int rows = matrix.Length;
+            int columns = matrix[0].Length;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int k = 0; k < columns; k++)
+                {
+                    if (matrix[i][k] == 0)
+                    {
+                        ilist.Add(i);
+                        klist.Add(k);
+                    }
+                }
+            }
+            for (int m = 0; m < ilist.Count; m++)
+            {
+                for (int i = 0; i < columns; i++)
+                {
+                    matrix[ilist[m]][i] = 0;
+                }
+            }
+            for (int m = 0; m < klist.Count; m++)
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    matrix[i][klist[m]] = 0;
+                }
+            }
+        }
+
+        public static IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            //O(n^2)
+            //var st1 = strs.OrderBy(c => c.Length);
+            //List<string> strslist = st1.ToList();
+            //List<IList<string>> result = new List<IList<string>>();
+
+            //int i = 0;
+            //while (strslist.Count > 0)
+            //{
+            //    List<string> current = new List<string>();
+            //    current.Add(strslist[i]);
+            //    for (int k = i + 1; k < strslist.Count; k++)
+            //    {
+            //        if (strslist[i].Length == strslist[k].Length)
+            //        {
+            //            if (String.Concat(strslist[i].OrderBy(c => c)).Equals(String.Concat(strslist[k].OrderBy(c => c))))
+            //            {
+            //                current.Add(strslist[k]);
+            //                strslist.RemoveAt(k);
+            //                k--;
+            //            }
+            //        }
+            //        else break;
+            //    }
+            //    current.Sort();
+            //    result.Add(current);
+            //    strslist.RemoveAt(i);
+            //}
+            //var tag = result.OrderBy(c => c.Count);
+
+            //return tag.ToList();
+            
+
+            //using Dictinary
+            Dictionary<int, string> d = new Dictionary<int, string>();
+            List<IList<string>> result = new List<IList<string>>();
+
+            for (int i = 0; i < strs.Length; i++)
+            {
+                d.Add(i, String.Concat(strs[i].OrderBy(c => c)));
+            }
+            Dictionary<int, string> dict = d.OrderBy(c => c.Value).ToDictionary(k => k.Key, i => i.Value);
+
+            List<string> values = dict.Values.ToList();
+            List<int> keys = dict.Keys.ToList();
+            for (int i = 0; i < dict.Count; i++)
+            {
+                ////without anagrams
+                while (i + 1 < dict.Count)
+                {
+                    if (values[i] != values[i + 1])
+                    {
+                        result.Add(new string[] { strs[keys[i]] });
+                        i++;
+                    }
+                    else break;
+                }
+                List<string> current = new List<string>();
+                current.Add(strs[keys[i]]);
+                int k = i + 1;
+                while(k < dict.Count)
+                {
+                    if (values[i] == values[k])
+                    {
+                        current.Add(strs[keys[k]]);
+                        k++;
+                    } 
+                    else break;
+                }
+                i = k - 1;
+                current.Sort();
+                result.Add(current);
+            }
+            var tag = result.OrderBy(c => c.Count);
+            return tag.ToList();
+        }
+
+        //WILL TRY WITH DICT
+        public static int LengthOfLongestSubstring(string s)
+        {
+            int i = 0; //first
+            int max = 0;
+            int current = 0;
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            while(i < s.Length)
+            { 
+                if(dict.ContainsKey(s[i]))
+                {
+                    current = i - dict[s[i]];
+                    dict[s[i]] = i;
+                    if (current > max) max = current;
+                }
+                else
+                {
+                    dict.Add(s[i], i);
+                    current++;
+                }
+                i++;
+            }
+            if (current > max) max = current;
+            return max;
+        }
     }
+}
+
 
     public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode child;
+        public ListNode(int val = 0, ListNode next = null)
         {
-            public int val;
-            public ListNode next;
-            public ListNode(int val = 0, ListNode next = null)
-            {
-                this.val = val;
-                this.next = next;
-            }
+            this.val = val;
+            this.next = next;
         }
+    }
 
 
-        public class TreeNode
+    public class TreeNode
+    {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
         {
-            public int val;
-            public TreeNode left;
-            public TreeNode right;
-            public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
-            {
-                this.val = val;
-                this.left = left;
-                this.right = right;
-            }
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
-    
-}
+    }
